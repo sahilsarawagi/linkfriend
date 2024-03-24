@@ -1,0 +1,16 @@
+
+<div class="mb-1 mt-9 max-w-5xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+<%= form_with model: @post do |form| %>
+  <div class="flex items-center space-x-4">
+    <img src="#" alt="Profile" class="text-white w-12 h-12 rounded-full">
+    <%= form.text_area :body,placeholder: "Write something...", class: "text-white flex-1 border-b border-gray-200 dark:border-gray-700 focus:outline-none focus:border-blue-500 p-2 rounded-md dark:bg-gray-700" %>
+  </div>
+  <div class="flex justify-end mt-4">
+     <button class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none mr-2 dark:bg-gray-700">Add Photo</button>
+    <%= form.submit "Post", class: "px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none dark:bg-gray-700"%>
+  </div>
+<% end %>
+</div>  
+<br>
+
+
