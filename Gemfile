@@ -47,6 +47,9 @@ gem "image_processing", "~> 1.2"
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
+  gem 'rspec-rails', '~> 6.1.0'
+  gem 'factory_bot_rails', '~> 6.2'
+  gem 'database_cleaner-active_record', '~> 2.1'
 end
 
 group :development do
