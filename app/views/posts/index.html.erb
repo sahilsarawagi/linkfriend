@@ -2,7 +2,7 @@
 <%= form_with model: @post do |form| %>
   <div class="flex items-center space-x-4">
     <img src="#" alt="Profile" class="text-white w-12 h-12 rounded-full">
-    <%= form.text_area :body,placeholder: "Write something...", class: "text-white flex-1 border-b border-gray-200 dark:border-gray-700 focus:outline-none focus:border-blue-500 p-2 rounded-md dark:bg-gray-700" %>
+    <%= form.text_area :body,placeholder: "Write something...", id:"post-box", class: "text-white flex-1 border-b border-gray-200 dark:border-gray-700 focus:outline-none focus:border-blue-500 p-2 rounded-md dark:bg-gray-700" %>
   </div>
   <div class="flex justify-end mt-4">
     <%= form.file_field :photo, class: "hidden", id: "photo-upload", accept: "image/*" %>
@@ -14,7 +14,7 @@
 <br>
 
 <% @posts.each do |post| %>
-  <div class="mt-5 max-w-5xl mx-auto bg-white dark:bg-gray-800 shadow-md rounded-md overflow-hidden text-white">
+  <div id="post-id-<%=post.id%>"class="mt-5 max-w-5xl mx-auto bg-white dark:bg-gray-800 shadow-md rounded-md overflow-hidden text-white">
   <div class="p-4">
     <div class="flex items-center space-x-4">
       <img src="#" alt="Profile" class="w-10 h-10 rounded-full text-white">
@@ -24,7 +24,7 @@
       </div>
     </div>
     <% if post.photo.attached? %>
-    <div class="mt-4 px-5 py-5 flex justify-center border border-gray-300  rounded-md items-center">
+    <div class="mt-4 post-image px-5 py-5 flex justify-center border border-gray-300  rounded-md items-center">
         <div class="max-w-80 max-h-80 mr-4 border border-blue-300 rounded-md overflow-hidden">
           <%= image_tag(post.photo, class: "object-cover max-w-full max-h-full") %>
         </div>
