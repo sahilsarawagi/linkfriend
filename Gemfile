@@ -50,6 +50,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 6.1.0'
   gem 'factory_bot_rails', '~> 6.2'
   gem 'database_cleaner-active_record', '~> 2.1'
+  gem "selenium-webdriver"
 end
 
 group :development do
