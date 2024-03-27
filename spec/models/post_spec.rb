@@ -7,4 +7,11 @@ RSpec.describe Post, type: :model do
       expect(association).to eq :belongs_to
     end
   end
+  describe 'Attachment' do
+    let(:post) { create(:post) }
+    it 'is valid' do
+      expect(post.photo).to be_attached
+    end
+  end
+  
 end
