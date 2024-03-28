@@ -9,7 +9,7 @@ RSpec.feature "Login", :type => :feature do
 
     fill_in 'user[email]', with: user.email
     fill_in 'user[password]', with: user.password
-    click_button 'Log in'
+    click_button 'Sign in'
 
     expect(page).to have_current_path(root_path)
     # expect(page).to have_content('You are logged in!')
