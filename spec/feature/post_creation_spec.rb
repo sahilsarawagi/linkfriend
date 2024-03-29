@@ -3,13 +3,12 @@ require "rails_helper"
 RSpec.feature "Creating Post", :type => :feature do
   let(:user) { create(:user) } 
 
-  scenario 'User creates a new post without photo' do
-    # Log in the user
+  before do
     login_as(user, scope: :user)
-
-    # Visit the new post page
     visit root_path
-
+  end
+  
+  scenario 'User creates a new post without photo' do
     # Fill in the form fields
     fill_in 'post-box', with: 'Lorem ipsum dolor sit amet.'
 
@@ -29,9 +28,6 @@ RSpec.feature "Creating Post", :type => :feature do
   end
 
   scenario 'User creates a new post with photo' do
-    login_as(user, scope: :user)
-    visit root_path
-  
     fill_in 'post-box', with: 'Lorem ipsum'
   
     attach_file('photo-upload', Rails.root.join('spec/fixtures/sample.jpeg')) # Attach a photo
