@@ -14,7 +14,7 @@
 <br>
 
 <% @posts.each do |post| %>
-  <div id="post-id-<%=post.id%>"class="mt-5 max-w-5xl mx-auto bg-white dark:bg-gray-800 shadow-md rounded-md overflow-hidden text-white">
+  <div id="post-id-<%=post.id%>" class="mt-5 max-w-5xl mx-auto bg-white dark:bg-gray-800 shadow-md rounded-md overflow-hidden text-white">
   <div class="p-4">
     <div class="flex items-center space-x-4">
       <img src="#" alt="Profile" class="w-10 h-10 rounded-full text-white">
@@ -44,5 +44,12 @@
     <button id="commentButton" class="text-gray-500 dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 focus:outline-none">Comment</button>
     </div>
   </div>
+  <div id="comment-form-<%= post.id %>" class="bg-white dark:bg-gray-800 shadow-md rounded-md overflow-hidden text-white p-4 mt-4">
+      <%= form_with model: [post,@comment] do |f| %>
+       <%= f.text_area :comment, placeholder: "Write your comment", id:"comment-box", class:"dark:bg-gray-700"%>
+      <%= f.hidden_field :post_id, value: post.id %>
+      <%= f.submit%>
+      <% end %>
+    </div>
 </div>  
 <% end %>

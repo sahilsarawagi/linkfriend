@@ -3,6 +3,7 @@ class PostsController < ApplicationController
   
   def index
     @post = Post.new
+    @comment = Comment.new
     @posts = Post.includes(:user).all
   end
   def create
