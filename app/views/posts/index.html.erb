@@ -28,11 +28,13 @@
         <div class="max-w-80 max-h-80 mr-4 border border-blue-300 rounded-md overflow-hidden">
           <%= image_tag(post.photo, class: "object-cover max-w-full max-h-full") %>
         </div>
-        </div>
+    </div>
       <% end %>
+    <% if post.body? %>  
       <div class="mt-4 px-1" >
        <p><%= post.body %></p>
       </div>
+    <% end %>  
   </div>
   <div class="bg-gray-100 dark:bg-gray-700 px-4 py-2 flex justify-between items-center">
     <div class="flex items-center space-x-2">
@@ -44,12 +46,18 @@
     <button id="commentButton" class="text-gray-500 dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 focus:outline-none">Comment</button>
     </div>
   </div>
-  <div id="comment-form-<%= post.id %>" class="bg-white dark:bg-gray-800 shadow-md rounded-md overflow-hidden text-white p-4 mt-4">
-      <%= form_with model: [post,@comment] do |f| %>
-       <%= f.text_area :comment, placeholder: "Write your comment", id:"comment-box", class:"dark:bg-gray-700"%>
-      <%= f.hidden_field :post_id, value: post.id %>
-      <%= f.submit%>
+  <div id="comment-form-<%= post.id %>" class="bg-white  dark:bg-gray-800 shadow-md rounded-md overflow-hidden text-white p-4 mt-4">
+        <%= form_with model: [post,@comment],class:"p-4" do |f| %>
+        <div class="flex items-center space-x-4">
+            <img src="profile.jpg" alt="Profile Picture" class="w-10 h-10 rounded-full">
+            <%= f.text_area :comment ,placeholder:"Write your comment here...", id:"comment-box", class:"dark:bg-gray-700 flex-1 border border-gray-200 dark:border-gray-700 focus:outline-none focus:border-blue-500 p-2 rounded-md resize-none"%>
+            <%= f.hidden_field :post_id, value: post.id %>
+        </div>
+        <div class="flex justify-end mt-4">
+            <%= f.submit "Post Comment", class:"px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none"%>
+        </div>
+    
       <% end %>
-    </div>
-</div>  
+  </div>  
+ </div>
 <% end %>
