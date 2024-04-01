@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   def index
     @post = Post.new
     @comment = Comment.new
-    @posts = Post.includes(:user).all
+    @posts = Post.includes(:user, :comments).all
   end
   def create
     @user = current_user

@@ -58,6 +58,32 @@
         </div>
     
       <% end %>
+      <div class="bg-gray-100 dark:bg-gray-700 px-4 py-2 flex items-center justify-between">
+        <p class="text-gray-800 dark:text-gray-200 font-semibold">Comments (<%= post.comments.count%>)</p>
+        <%# TODO: Add a toggle button for the comments, Use button up-down  %>
+      </div>
+      <div class="p-4 overflow-auto max-h-72  hover:overflow-scroll  border-t border-gray-200 dark:border-gray-700">
+      <% post.comments.each do |comment| %>
+      <!-- Individual Comments Here -->
+      <div class="py-4 border-b border-gray-200 dark:border-gray-700">  
+          <div class="flex justify-between items-center mt-2  mb-2">
+              <div class="flex items-center">
+                  <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold"><img
+                          class="mr-2 w-6 h-6 rounded-full"
+                          src="#"
+                          alt="Profile Picture">User Name</p>
+                  <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2024-03-22"
+                          title="Mar 22th, 2024">Mar 22, 2024</time></p>
+                  <%# TODO: Add a button here to edit and delete the comment %>
+              </div>
+          </div>
+              <p class="text-gray-500 dark:text-gray-400 "> 
+                <%= comment.comment%> 
+              </p>
+
+        </div>
+      <% end %>
+      </div>
   </div>  
  </div>
 <% end %>

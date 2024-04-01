@@ -11,3 +11,12 @@
 }
 
 */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--secondary) var(--primary);
+}
+/* TODO: choosse color for scrollbar */
+/* :root {
+  --primary: rebeccapurple;
+  --secondary: cornflowerblue;
+} */
