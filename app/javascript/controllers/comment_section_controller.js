@@ -4,16 +4,14 @@ export default class extends Controller {
   static targets = ["commentForm","commentSection"]
 
   connect() {
-    console.log("I am comment connected")
   }
 
   toggleCommentForm() {
-    console.log("I am here")
     this.commentFormTarget.classList.toggle("hidden")
   }
 
   toggleComments() {
-    this.commentSection.classList.toggle("hidden")
+    this.commentSectionTarget.classList.toggle("hidden")
   }
 
   outsideClick(event) {
