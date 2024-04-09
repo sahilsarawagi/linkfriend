@@ -6,4 +6,12 @@ module ApplicationHelper
       "/assets/default_profile.jpg"
     end
   end
+
+  def user_name(user)
+    "#{user.first_name.capitalize} #{user.last_name.capitalize}"
+  end
+  
+  def user_email(user)
+    "#{user.email}"
+  end
 end

@@ -19,7 +19,7 @@
     <div class="flex items-center space-x-4">
       <%= image_tag(user_profile_photo(post.user), class: "w-10 h-10 rounded-full text-white") %>  
       <div>
-        <p class="font-semibold"> <%= "#{post.user.first_name.capitalize} #{post.user.last_name.capitalize}" %></p>
+        <p class="font-semibold"> <%= user_name(post.user) %></p>
         <p class="text-blue-500 text-sm">Posted on <%= post.updated_at.strftime("%B %d, %Y") %></p>
       </div>
     </div>
@@ -75,7 +75,7 @@
           <div class="flex justify-between items-center mt-2  mb-2">
               <div class="flex items-center">
                   <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
-                   <%= image_tag(user_profile_photo(comment.user), class: "mr-2 w-6 h-6 rounded-full") %>  User Name</p>
+                   <%= image_tag(user_profile_photo(comment.user), class: "mr-2 w-6 h-6 rounded-full") %>  <%= user_name(comment.user) %></p>
                   <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2024-03-22"
                           title="Mar 22th, 2024">Mar 22, 2024</time></p>
                   <%# TODO: Add a button here to edit and delete the comment %>
