@@ -19,7 +19,7 @@ module ApplicationHelper
   end
 
   def user_name(user)
-    "#{user.first_name.capitalize} #{user.last_name.capitalize}"
+    link_to "#{user.first_name.capitalize} #{user.last_name.capitalize}", user_path(user)
   end
   
   def user_email(user)
