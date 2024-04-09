@@ -14,4 +14,20 @@ class User < ApplicationRecord
   has_many :followees, through: :followed_users
   has_many :following_users, foreign_key: :followee_id, class_name: 'Follow'
   has_many :followers, through: :following_users
+
+  has_one_attached :profile_photo, dependent: :destroy
+  after_commit :add_default_profile, on: %i[create update]
+
+  private 
+  def add_default_profile
+    unless profile_photo.attached?
+      profile_photo.attach(
+        io: File.open(
+          Rails.root / 'app' / 'assets' / 'images' / 'default_profile.jpg'
+        ), filename: 'default_profile.jpg',
+        content_type: 'image/* '
+      )
+    end
+  end
+
 end
