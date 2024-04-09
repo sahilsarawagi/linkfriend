@@ -1,7 +1,7 @@
 <div class="mb-1 mt-9 max-w-5xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
 <%= form_with model: @post do |form| %>
   <div class="flex items-center space-x-4">
-    <img src="#" alt="Profile" class="text-white w-12 h-12 rounded-full">
+    <%= image_tag(user_profile_photo(current_user), class: "text-white w-12 h-12 rounded-full") %>  
     <%= form.text_area :body,placeholder: "Write something...", id:"post-box", class: "text-white flex-1 border-b border-gray-200 dark:border-gray-700 focus:outline-none focus:border-blue-500 p-2 rounded-md dark:bg-gray-700" %>
   </div>
   <div class="flex justify-end mt-4">
@@ -17,7 +17,7 @@
   <div data-controller="comment-section" id="post-id-<%=post.id%>" class="mt-5 max-w-5xl mx-auto bg-white dark:bg-gray-800 shadow-md rounded-md overflow-hidden text-white">
   <div class="p-4">
     <div class="flex items-center space-x-4">
-      <img src="#" alt="Profile" class="w-10 h-10 rounded-full text-white">
+      <%= image_tag(user_profile_photo(post.user), class: "w-10 h-10 rounded-full text-white") %>  
       <div>
         <p class="font-semibold"> <%= "#{post.user.first_name.capitalize} #{post.user.last_name.capitalize}" %></p>
         <p class="text-blue-500 text-sm">Posted on <%= post.updated_at.strftime("%B %d, %Y") %></p>
@@ -49,7 +49,7 @@
   <div id="comment-form-<%= post.id %>" data-comment-section-target="commentForm" data-action="click@window->comment-section#outsideClick" class="bg-white hidden dark:bg-gray-800 shadow-md rounded-md overflow-hidden text-white p-4 mt-4">
         <%= form_with model: [post,@comment],class:"p-4" do |f| %>
         <div class="flex items-center space-x-4">
-            <img src="profile.jpg" alt="Profile Picture" class="w-10 h-10 rounded-full">
+            <%= image_tag(user_profile_photo(current_user), class: "w-10 h-10 rounded-full") %>  
             <%= f.text_area :comment ,placeholder:"Write your comment here...", id:"comment-box", class:"dark:bg-gray-700 flex-1 border border-gray-200 dark:border-gray-700 focus:outline-none focus:border-blue-500 p-2 rounded-md resize-none"%>
             <%= f.hidden_field :post_id, value: post.id %>
         </div>
@@ -74,10 +74,8 @@
       <div class="py-4 border-b border-gray-200 dark:border-gray-700">  
           <div class="flex justify-between items-center mt-2  mb-2">
               <div class="flex items-center">
-                  <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold"><img
-                          class="mr-2 w-6 h-6 rounded-full"
-                          src="#"
-                          alt="Profile Picture">User Name</p>
+                  <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
+                   <%= image_tag(user_profile_photo(comment.user), class: "mr-2 w-6 h-6 rounded-full") %>  User Name</p>
                   <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2024-03-22"
                           title="Mar 22th, 2024">Mar 22, 2024</time></p>
                   <%# TODO: Add a button here to edit and delete the comment %>
