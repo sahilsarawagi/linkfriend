@@ -1,10 +1,15 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :users, only: [:index,:show]
+  # Todo this has to be inside users resources, maybe we can use put method for pending request
   post '/users/:id/follow', to: "users#follow", as: "follow_user"
   post '/users/:id/unfollow', to: "users#unfollow", as: "unfollow_user"
   resources :posts do
     resources :comments , only: [:create,:destroy]
+    member do
+      post "like", to: "posts#like" 
+      delete "unlike", to: "posts#unlike" 
+    end
   end
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
