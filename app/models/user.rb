@@ -18,6 +18,8 @@ class User < ApplicationRecord
   has_one_attached :profile_photo, dependent: :destroy
   after_commit :add_default_profile, on: %i[create update]
 
+  has_many :likes, dependent: :destroy
+
   private 
   def add_default_profile
     unless profile_photo.attached?
