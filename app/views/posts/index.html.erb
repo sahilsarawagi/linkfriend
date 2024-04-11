@@ -37,17 +37,17 @@
     <% end %>  
   </div>
   <div class="bg-gray-100 dark:bg-gray-700 px-4 py-2 flex justify-between items-center">
-    <div class="flex items-center space-x-2">
+    <div class="flex items-center space-x-1">
      <% if post.likes.exists?(user_id: current_user.id) %>
-      <%= button_to unlike_post_path(post), method: :delete, class: "px-2" do %>
+      <%= button_to unlike_post_path(post), method: :delete, class: "inline-flex items-center px-3 py-1 bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-medium rounded-md" do %>
         <%= image_tag("like.svg", alt: "Like", class: "w-5 h-5") %>
       <% end %>
     <% else %>
-      <%= button_to like_post_path(post), method: :post, class: "px-2" do %>
+      <%= button_to like_post_path(post), method: :post, class: "inline-flex items-center px-3 py-1 bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-medium rounded-md" do %>
         <%= image_tag("unlike.svg", alt: "UnLike", class: "w-5 h-5") %>
       <% end %>
     <% end %>
-
+    <p class="text-gray-400 text-sm font-normal px-2 pb-1"><span class="underline">likes</span> (<%= post.likes.count %>)</p>
     </div>
     <div class="flex items-center space-x-2">
     <%# <img src="comment-icon.svg" alt="Comment Icon" class="w-5 h-5"> %>
