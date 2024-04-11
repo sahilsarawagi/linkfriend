@@ -38,18 +38,19 @@
   </div>
   <div class="bg-gray-100 dark:bg-gray-700 px-4 py-2 flex justify-between items-center">
     <div class="flex items-center space-x-2">
-    <img src="like-icon.svg" alt="Like Icon" class="w-5 h-5">
-    <%# <button class="text-blue-500 dark:text-blue-400 hover:text-blue-600 dark:hover:text-blue-300 focus:outline-none">Like</button> %>
-
-      <% if post.likes.exists?(user_id: current_user.id) %>
-        <%= button_to "Unlike", unlike_post_path(post), method: :delete, class: "text-rose-600" %>
-      <% else %>
-        <%= button_to "Like", like_post_path(post), method: :post, class: "like-button" %>
+     <% if post.likes.exists?(user_id: current_user.id) %>
+      <%= button_to unlike_post_path(post), method: :delete, class: "px-2" do %>
+        <%= image_tag("like.svg", alt: "Like", class: "w-5 h-5") %>
       <% end %>
+    <% else %>
+      <%= button_to like_post_path(post), method: :post, class: "px-2" do %>
+        <%= image_tag("unlike.svg", alt: "UnLike", class: "w-5 h-5") %>
+      <% end %>
+    <% end %>
 
     </div>
     <div class="flex items-center space-x-2">
-    <img src="comment-icon.svg" alt="Comment Icon" class="w-5 h-5">
+    <%# <img src="comment-icon.svg" alt="Comment Icon" class="w-5 h-5"> %>
     <button id="commentButton" data-action="click->comment-section#toggleCommentForm" class="text-gray-500 dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 focus:outline-none">Comment</button>
     </div>
   </div>
