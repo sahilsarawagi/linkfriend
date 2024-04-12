@@ -31,11 +31,15 @@ class PostsController < ApplicationController
 
   def likes
     @post = Post.find(params[:id])
-    @post_like = @post.likes.includes(:user).all
+    @post_like_users = post_like_users(@post.likes)
   end
 
   private
     def post_params
       params.require(:post).permit(:body,:photo)
+    end
+
+    def post_like_users(likes)
+      likes.map(&:user)
     end
 end

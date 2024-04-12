@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :users, only: [:index,:show]
+  resources :users, only: [:index,:show] do 
+    member do
+      get "followers"
+      get "followings"
+    end
+  end
   # Todo this has to be inside users resources, maybe we can use put method for pending request
   post '/users/:id/follow', to: "users#follow", as: "follow_user"
   post '/users/:id/unfollow', to: "users#unfollow", as: "unfollow_user"

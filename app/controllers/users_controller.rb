@@ -21,5 +21,15 @@ class UsersController < ApplicationController
     redirect_back(fallback_location: users_path)
   end
 
+  def followers
+    @user = User.find(params[:id])
+    @user_followers = @user.followers
+  end
+
+  def followings
+    @user = User.find(params[:id])
+    @user_followings = @user.followees
+  end
+
 end
 
