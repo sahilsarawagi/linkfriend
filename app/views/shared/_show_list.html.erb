@@ -1,0 +1,24 @@
+<div>
+     <ul class="divide-y divide-gray-200 dark:divide-gray-700">
+       <% interactions.each do |interaction| %>
+         <li class="py-3 sm:py-4">
+             <div class="flex items-center space-x-4">
+                 <div class="flex-shrink-0">
+                      <%= image_tag(user_profile_photo(interaction.user), class: "w-8 h-8 rounded-full") %>
+                 </div>
+                 <div class="flex-1 min-w-0">
+                     <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                         <%= user_name(interaction.user) %>
+                     </p>
+                     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                         <%= user_email(interaction.user) %>
+                     </p>
+                 </div>
+                 <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                   <%= button_to follow_unfollow_button(interaction.user)[:label],follow_unfollow_button(interaction.user)[:path], method: follow_unfollow_button(interaction.user)[:method]  ,form_class:"flex gap-2 px-2",class:"flex-1 rounded-full bg-blue-600 dark:bg-blue-800 text-white dark:text-white antialiased font-bold hover:bg-blue-800 dark:hover:bg-blue-900 px-4 py-2"%>
+                 </div>
+             </div>
+         </li>
+         <%end%>
+      </ul>
+</div>

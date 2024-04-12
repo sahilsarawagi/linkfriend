@@ -7,8 +7,9 @@ Rails.application.routes.draw do
   resources :posts do
     resources :comments , only: [:create,:destroy]
     member do
-      post "like", to: "posts#like" 
-      delete "unlike", to: "posts#unlike" 
+      post "like"
+      delete "unlike"
+      get "likes"
     end
   end
   

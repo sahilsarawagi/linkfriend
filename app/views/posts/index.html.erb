@@ -47,7 +47,7 @@
         <%= image_tag("unlike.svg", alt: "UnLike", class: "w-5 h-5") %>
       <% end %>
     <% end %>
-    <p class="text-gray-400 text-sm font-normal px-2 pb-1"><span class="underline">likes</span> (<%= post.likes.count %>)</p>
+    <p class="text-gray-400 text-sm font-normal px-2 pb-1"><span class="underline"><%= link_to "likes", likes_post_path(post)%></span> (<%= post.likes.count %>)</p>
     </div>
     <div class="flex items-center space-x-2">
     <%# <img src="comment-icon.svg" alt="Comment Icon" class="w-5 h-5"> %>

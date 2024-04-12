@@ -29,6 +29,11 @@ class PostsController < ApplicationController
     redirect_back(fallback_location: posts_path)
   end
 
+  def likes
+    @post = Post.find(params[:id])
+    @post_like = @post.likes.includes(:user).all
+  end
+
   private
     def post_params
       params.require(:post).permit(:body,:photo)
