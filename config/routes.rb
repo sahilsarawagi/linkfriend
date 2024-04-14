@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   # Todo this has to be inside users resources, maybe we can use put method for pending request
   post '/users/:id/follow', to: "users#follow", as: "follow_user"
   post '/users/:id/unfollow', to: "users#unfollow", as: "unfollow_user"
+  post '/users/:id/accept', to: "users#accept_request", as: "accept_request"
+  post '/users/:id/cancel', to: "users#cancel_request", as: "cancel_request"
   resources :posts do
     resources :comments , only: [:create,:destroy]
     member do

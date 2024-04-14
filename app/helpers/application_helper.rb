@@ -7,9 +7,11 @@ module ApplicationHelper
     end
   end
 
-  def follow_unfollow_button(user)
+  def follow_unfollow_button(user,pending=false)
     if user.id == current_user.id
-      {label: "Edit profile", path: edit_user_registration_path, method: :get}      
+      {label: "Edit profile", path: edit_user_registration_path, method: :get}   
+    elsif pending
+      {label: "Requested", path: unfollow_user_path(user), method: :post}      
     elsif current_user.followees.include?(user) 
       {label: "Unfollow", path: unfollow_user_path(user), method: :post}
     else 

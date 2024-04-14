@@ -18,17 +18,21 @@
          <p class="text-gray-500 text-sm font-normal">Posts</p>
        </div>
        <div class="flex flex-col items-center justify-center">
-         <h3 class="text-bluePrimary text-xl font-bold"><%= @user.followers.count%></h3>
+         <h3 class="text-bluePrimary text-xl font-bold"><%= @user_followers_count%></h3>
          <p class="text-gray-500 text-sm font-normal"><%= link_to "Followers", followers_user_path(@user)%></p>
        </div>
        <div class="flex flex-col items-center justify-center">
-         <h3 class="text-bluePrimary text-xl font-bold"><%= @user.followees.count%></h3>
+         <h3 class="text-bluePrimary text-xl font-bold"><%= @user_followings_count%></h3>
          <p class="text-gray-500 text-sm font-normal"><%= link_to "Following", followings_user_path(@user)%></p>
        </div>
    </div>
-
-        <%= button_to follow_unfollow_button(@user)[:label],follow_unfollow_button(@user)[:path], method: follow_unfollow_button(@user)[:method]  ,form_class:"p-4 border-t mx-8 mt-2",class:"w-1/2 block mx-auto rounded-full bg-blue-900 hover:shadow-lg font-semibold text-white px-6 py-2"%>
-
+    <div class="md:flex sm:flex-row p-4 border-t mt-2">
+        <%= button_to follow_unfollow_button(@user, @requested_pending_status)[:label],follow_unfollow_button(@user, @requested_pending_status)[:path], method: follow_unfollow_button(@user, @requested_pending_status)[:method]  ,form_class:"w-full mx-auto px-6 py-2",class:"w-full rounded-full bg-blue-900 hover:shadow-lg font-semibold text-white px-6 py-2"%>
+        <%if @pending_request_status %>
+        <%= button_to "Accept Request",accept_request_path(@user), method: :post  ,form_class:"w-full mx-auto px-6 py-2",class:"w-full rounded-full bg-blue-900 hover:shadow-lg font-semibold text-white px-6 py-2"%>
+        <%= button_to "Cancel Request",cancel_request_path(@user), method: :post  ,form_class:"w-full mx-auto px-6 py-2",class:"w-full rounded-full bg-blue-900 hover:shadow-lg font-semibold text-white px-6 py-2"%>
+        <%end%>
+    <div>  
    </div>
 </div>
 <div class="w-full max-w-5xl p-2 md:p-4">
