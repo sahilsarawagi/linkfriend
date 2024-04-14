@@ -3,6 +3,8 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    @pending_request_users = user_follower(Follow.follower_list(current_user.id, true))
+    @sent_request_users = user_followee(Follow.followee_list(current_user.id, true))
   end
 
   def show
