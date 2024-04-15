@@ -9,6 +9,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @comment = Comment.new
     @requested_pending_status = Follow.pending_field(current_user.id,@user.id)&.pending
     @pending_request_status = Follow.pending_field(@user.id,current_user.id)&.pending
     @user_followers_count = Follow.follower_list(@user.id, false).count

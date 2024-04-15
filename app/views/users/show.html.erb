@@ -35,8 +35,12 @@
     <div>  
    </div>
 </div>
-<div class="w-full max-w-5xl p-2 md:p-4">
+</div>
+</div>
+<div class="w-full max-w-5xl md:p-4">
  <h2 class="text-2xl font-bold text-white sm:text-xl"> Recent Posts </h2>
-  <%# TODO Add posts %>
+ <div>
+    <%= render 'shared/post' , posts: @user.posts , comment: @comment%>
+  </div>
 </div>
-</div>
+

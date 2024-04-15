@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
     @comment = @user.comments.new(comment_params)
 
     if @comment.save
-      redirect_to :root
+      redirect_back(fallback_location: users_path)
     else
       render :index, status: :unprocessable_entity
     end

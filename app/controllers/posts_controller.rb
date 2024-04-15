@@ -6,6 +6,7 @@ class PostsController < ApplicationController
     @comment = Comment.new
     @posts = Post.includes(:user, :comments, :likes).all
   end
+  
   def create
     @user = current_user
     @post = @user.posts.new(post_params)

@@ -1,8 +1,10 @@
-<div class="mb-1 mt-9 max-w-5xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+<div class="bg-white min-h-screen dark:bg-gray-800">
+<div class="container max-w-7xl px-6 py-10 mx-auto">  
+<div class="mb-1 max-w-5xl mx-auto bg-white dark:bg-gray-900 dark:border-blue-500 border-b rounded-lg shadow-md p-6">
 <%= form_with model: @post do |form| %>
   <div class="flex items-center space-x-4">
     <%= image_tag(user_profile_photo(current_user), class: "text-white w-12 h-12 rounded-full") %>  
-    <%= form.text_area :body,placeholder: "Write something...", id:"post-box", class: "text-white flex-1 border-b border-gray-200 dark:border-gray-700 focus:outline-none focus:border-blue-500 p-2 rounded-md dark:bg-gray-700" %>
+    <%= form.text_area :body,placeholder: "Write something...", id:"post-box", class: "text-white flex-1 border-b border-gray-200 dark:border-gray-700 focus:outline-none focus:border-blue-500 p-2 rounded-md dark:bg-[#1a202c]" %>
   </div>
   <div class="flex justify-end mt-4">
     <%= form.file_field :photo, class: "hidden", id: "photo-upload", accept: "image/*" %>
@@ -12,90 +14,7 @@
 <% end %>
 </div>  
 <br>
+  <%= render 'shared/post' , posts: @posts , comment: @comment%>
 
-<% @posts.each do |post| %>
-  <div data-controller="comment-section" id="post-id-<%=post.id%>" class="mt-5 max-w-5xl mx-auto bg-white dark:bg-gray-800 shadow-md rounded-md overflow-hidden text-white">
-  <div class="p-4">
-    <div class="flex items-center space-x-4">
-      <%= image_tag(user_profile_photo(post.user), class: "w-10 h-10 rounded-full text-white") %>  
-      <div>
-        <p class="font-semibold"> <%= user_name(post.user) %></p>
-        <p class="text-blue-500 text-sm">Posted on <%= post.updated_at.strftime("%B %d, %Y") %></p>
-      </div>
-    </div>
-    <% if post.photo.attached? %>
-    <div class="mt-4 post-image px-5 py-5 flex justify-center border border-gray-300  rounded-md items-center">
-        <div class="max-w-80 max-h-80 mr-4 border border-blue-300 rounded-md overflow-hidden">
-          <%= image_tag(post.photo, class: "object-cover max-w-full max-h-full") %>
-        </div>
-    </div>
-      <% end %>
-    <% if post.body? %>  
-      <div class="mt-4 px-1" >
-       <p><%= post.body %></p>
-      </div>
-    <% end %>  
-  </div>
-  <div class="bg-gray-100 dark:bg-gray-700 px-4 py-2 flex justify-between items-center">
-    <div class="flex items-center space-x-1">
-     <% if post.likes.exists?(user_id: current_user.id) %>
-      <%= button_to unlike_post_path(post), method: :delete, class: "inline-flex items-center px-3 py-1 bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-medium rounded-md" do %>
-        <%= image_tag("like.svg", alt: "Like", class: "w-5 h-5") %>
-      <% end %>
-    <% else %>
-      <%= button_to like_post_path(post), method: :post, class: "inline-flex items-center px-3 py-1 bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-medium rounded-md" do %>
-        <%= image_tag("unlike.svg", alt: "UnLike", class: "w-5 h-5") %>
-      <% end %>
-    <% end %>
-    <p class="text-gray-400 text-sm font-normal px-2 pb-1"><span class="underline"><%= link_to "likes", likes_post_path(post)%></span> (<%= post.likes.count %>)</p>
-    </div>
-    <div class="flex items-center space-x-2">
-    <%# <img src="comment-icon.svg" alt="Comment Icon" class="w-5 h-5"> %>
-    <button id="commentButton" data-action="click->comment-section#toggleCommentForm" class="text-gray-500 dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 focus:outline-none">Comment</button>
-    </div>
-  </div>
-  <div id="comment-form-<%= post.id %>" data-comment-section-target="commentForm" data-action="click@window->comment-section#outsideClick" class="bg-white hidden dark:bg-gray-800 shadow-md rounded-md overflow-hidden text-white p-4 mt-4">
-        <%= form_with model: [post,@comment],class:"p-4" do |f| %>
-        <div class="flex items-center space-x-4">
-            <%= image_tag(user_profile_photo(current_user), class: "w-10 h-10 rounded-full") %>  
-            <%= f.text_area :comment ,placeholder:"Write your comment here...", id:"comment-box", class:"dark:bg-gray-700 flex-1 border border-gray-200 dark:border-gray-700 focus:outline-none focus:border-blue-500 p-2 rounded-md resize-none"%>
-            <%= f.hidden_field :post_id, value: post.id %>
-        </div>
-        <div class="flex justify-end mt-4">
-            <%= f.submit "Post Comment", class:"inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-500 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-600"%>
-        </div>
-    
-      <% end %>
-      <div class="bg-gray-100 dark:bg-gray-700 px-4 py-2 flex items-center justify-between">
-        <p class="text-gray-800 dark:text-gray-200 font-semibold">Comments (<%= post.comments.count%>)</p>
-         <button id="dropdownComment1Button" data-action="click->comment-section#toggleComments"
-                class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                type="button">
-      
-                <%= image_tag("/assets/up-down.svg", alt: "up-down", class:"w-4 h-4 fill-white" )%>
-              
-            </button>
-      </div>
-      <div data-comment-section-target="commentSection" class="p-4 overflow-auto max-h-72 hidden  hover:overflow-scroll  border-t border-gray-200 dark:border-gray-700">
-      <% post.comments.each do |comment| %>
-      <!-- Individual Comments Here -->
-      <div class="py-4 border-b border-gray-200 dark:border-gray-700">  
-          <div class="flex justify-between items-center mt-2  mb-2">
-              <div class="flex items-center">
-                  <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">
-                   <%= image_tag(user_profile_photo(comment.user), class: "mr-2 w-6 h-6 rounded-full") %>  <%= user_name(comment.user) %></p>
-                  <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2024-03-22"
-                          title="Mar 22th, 2024">Mar 22, 2024</time></p>
-                  <%# TODO: Add a button here to edit and delete the comment %>
-              </div>
-          </div>
-              <p class="text-gray-500 dark:text-gray-400 "> 
-                <%= comment.comment%> 
-              </p>
-
-        </div>
-      <% end %>
-      </div>
-  </div>  
- </div>
-<% end %>
+</div>
+</div>
