@@ -1,18 +1,31 @@
-<section class="bg-white min-h-screen dark:bg-gray-800">
+<section data-controller="toggle" class="bg-white min-h-screen dark:bg-gray-800">
     <div class="container max-w-7xl px-6 py-10 mx-auto">
 
         <div class="flex items-center justify-center">
             <div class="flex items-center p-1 border border-blue-600 dark:border-blue-400 rounded-xl">
-                <button class="px-4 py-2 text-sm sm:text-xs font-medium text-blue-600 capitalize transition-colors duration-300 md:py-3 dark:text-blue-400 dark:hover:text-white focus:outline-none hover:bg-blue-600 hover:text-white rounded-xl md:px-12">Pending Request</button>
+                <button data-action="click->toggle#toggle click->toggle#btntoggle" data-index="0" data-toggle-target="btn" class="px-4 py-2 text-sm sm:text-xs font-medium text-blue-600 capitalize transition-colors duration-300 md:py-3 dark:text-blue-400 dark:hover:text-white focus:outline-none hover:bg-blue-600 hover:text-white rounded-xl md:px-12">Pending Request</button>
 
-                <button class="px-4 py-2 text-sm sm:text-xs font-medium text-white capitalize bg-blue-600 md:py-3 rounded-xl md:mx-8 md:px-12">People</button>
+                <button data-action="click->toggle#toggle click->toggle#btntoggle" data-index="1" data-toggle-target="btn" class="px-4 py-2 text-sm sm:text-xs font-medium text-white capitalize bg-blue-600 md:py-3 rounded-xl md:mx-8 md:px-12">People</button>
 
-                <button class="px-4 py-2 text-sm sm:text-xs font-medium text-blue-600 capitalize transition-colors duration-300 md:py-3 dark:text-blue-400 dark:hover:text-white focus:outline-none hover:bg-blue-600 hover:text-white rounded-xl md:px-12">Sent Request</button>
+                <button data-action="click->toggle#toggle click->toggle#btntoggle" data-index="2" data-toggle-target="btn" class="px-4 py-2 text-sm sm:text-xs font-medium text-blue-600 capitalize transition-colors duration-300 md:py-3 dark:text-blue-400 dark:hover:text-white focus:outline-none hover:bg-blue-600 hover:text-white rounded-xl md:px-12">Sent Request</button>
             </div>
         </div>
-        
+
+        <%# Pending Request %>
+        <div data-toggle-target="toggle" class="hidden min-h-screen dark:bg-gray-800">
+        <div class="mb-1 pt-9 max-w-5xl mx-auto rounded-lg shadow-md">
+          <div class="flex flex-col justify-center p-4 max-w-5xl bg-white rounded-lg border shadow-md sm:p-8 dark:bg-gray-900 dark:border-gray-700">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="md:text-xl sm:text-sm font-bold leading-none text-gray-900 dark:text-white"> Pending Requests </h3>
+           </div>
+            <%# Render Here %>
+            <div><%= render 'shared/show_list' , users: @pending_request_users%></div> 
+        </div>
+        </div>
+        </div>
+
         <%# Find People %>
-        <div class="min-h-screen dark:bg-gray-800">
+        <div data-toggle-target="toggle" class="min-h-screen dark:bg-gray-800">
         <div class="mb-1 pt-9 max-w-5xl mx-auto rounded-lg shadow-md">
           <div class="flex flex-col justify-center p-4 max-w-5xl bg-white rounded-lg border shadow-md sm:p-8 dark:bg-gray-900 dark:border-gray-700">
             <div class="flex justify-between items-center mb-4">
@@ -25,7 +38,7 @@
         </div>
 
         <%# Sent Request %>
-        <div class="hidden min-h-screen dark:bg-gray-800">
+        <div data-toggle-target="toggle" class="hidden min-h-screen dark:bg-gray-800">
         <div class="mb-1 pt-9 max-w-5xl mx-auto rounded-lg shadow-md">
           <div class="flex flex-col justify-center p-4 max-w-5xl bg-white rounded-lg border shadow-md sm:p-8 dark:bg-gray-900 dark:border-gray-700">
             <div class="flex justify-between items-center mb-4">
@@ -37,17 +50,5 @@
         </div>
         </div>
 
-        <%# Pending Request %>
-        <div class="hidden min-h-screen dark:bg-gray-800">
-        <div class="mb-1 pt-9 max-w-5xl mx-auto rounded-lg shadow-md">
-          <div class="flex flex-col justify-center p-4 max-w-5xl bg-white rounded-lg border shadow-md sm:p-8 dark:bg-gray-900 dark:border-gray-700">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="md:text-xl sm:text-sm font-bold leading-none text-gray-900 dark:text-white"> Pending Requests </h3>
-           </div>
-            <%# Render Here %>
-            <div><%= render 'shared/show_list' , users: @pending_request_users%></div> 
-        </div>
-        </div>
-        </div>
     </div>
 </section>
