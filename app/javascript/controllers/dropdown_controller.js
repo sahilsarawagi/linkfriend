@@ -1,42 +1,48 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["largemenu","smallmenu","notification"]
-  myTarget = null;
+  static targets = ["notification", "usermenu", "burgermenu"]
 
   connect() {
-    if (window.matchMedia('(max-width: 768px)').matches){
-    // When the screen is medium and samll 
-    this.myTarget = this.smallmenuTarget
-    this.myTarget.classList.add("absolute")
-    }else{
-    // When the screen is large than medium  
-    this.myTarget = this.largemenuTarget
-    }
+    // Bind the outsideClick method to `this` context
+    this.boundOutsideClick = this.outsideClick.bind(this)
+    document.addEventListener("click", this.boundOutsideClick)
   }
 
-  toggleMenu() {
-    this.myTarget.classList.toggle("hidden")
+  disconnect() {
+    document.removeEventListener("click", this.boundOutsideClick)
   }
 
-  toggleNotificationMenu(){
+  toggleUserMenu() {
+    this.usermenuTarget.classList.toggle("hidden")
+    this.notificationTarget.classList.add("hidden")
+    this.burgermenuTarget.classList.add("hidden")
+  }
+
+  toggleBurgerMenu() {
+    this.burgermenuTarget.classList.toggle("hidden")
+    this.usermenuTarget.classList.add("hidden")
+    this.notificationTarget.classList.add("hidden")
+  }
+
+  toggleNotificationMenu() {
     this.notificationTarget.classList.toggle("hidden")
+    this.usermenuTarget.classList.add("hidden")
+    this.burgermenuTarget.classList.add("hidden")
   }
 
   outsideClick(event) {
-    // Ignore event if clicked within element
-    if(this.element === event.target || this.element.contains(event.target)) return;
+    if (this.element.contains(event.target)) return
+    if(!this.burgermenuTarget.classList.contains("hidden") ||
+       !this.usermenuTarget.classList.contains("hidden") ||
+       !this.notificationTarget.classList.contains("hidden")) event.preventDefault();
 
-    // prevent any event when dropdown is open
-    if(!this.myTarget.classList.contains("hidden")) event.preventDefault();
-    
-    // close the menu on clicking outside
     this.closeMenu()
   }
-  closeMenu(){
-    this.myTarget.classList.add("hidden")
+
+  closeMenu() {
+    this.usermenuTarget.classList.add("hidden")
     this.notificationTarget.classList.add("hidden")
+    this.burgermenuTarget.classList.add("hidden")
   }
 }
-  
-  
