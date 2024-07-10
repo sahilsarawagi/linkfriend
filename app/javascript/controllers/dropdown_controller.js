@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["largemenu","smallmenu"]
+  static targets = ["largemenu","smallmenu","notification"]
   myTarget = null;
 
   connect() {
@@ -18,6 +18,11 @@ export default class extends Controller {
   toggleMenu() {
     this.myTarget.classList.toggle("hidden")
   }
+
+  toggleNotificationMenu(){
+    this.notificationTarget.classList.toggle("hidden")
+  }
+
   outsideClick(event) {
     // Ignore event if clicked within element
     if(this.element === event.target || this.element.contains(event.target)) return;
@@ -30,6 +35,7 @@ export default class extends Controller {
   }
   closeMenu(){
     this.myTarget.classList.add("hidden")
+    this.notificationTarget.classList.add("hidden")
   }
 }
   

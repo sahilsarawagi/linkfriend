@@ -5,14 +5,14 @@
       <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">LinkFriend</span>
     </a>
     <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse relative">
-      <button type="button" class="me-4 flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="notification-menu-button" aria-expanded="false" data-dropdown-toggle="notification-dropdown" data-dropdown-placement="bottom">
+      <button data-action="click->dropdown#toggleNotificationMenu" type="button" class="me-4 flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="notification-menu-button" aria-expanded="false" data-dropdown-toggle="notification-dropdown" data-dropdown-placement="bottom">
         <span class="sr-only">Open notifications menu</span>
         <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V4a2 2 0 10-4 0v1.341A6.002 6.002 0 006 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 01-6 0v-1m6 0H9" />
         </svg>
       </button>
       <!-- Notification Dropdown -->
-      <div class="absolute z-50 top-full right-9 w-48  my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600 " id="user-dropdown" id="notification-dropdown">
+      <div data-dropdown-target="notification"  data-action="click@window->dropdown#outsideClick" class=" hidden absolute z-50 top-full right-9 w-48  my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600 " id="user-dropdown" id="notification-dropdown">
         <div class="px-4 py-3">
           <span class="block text-sm text-gray-900 dark:text-white">Notifications</span>
         </div>
