@@ -9,6 +9,8 @@ class User < ApplicationRecord
   # Association for comment
   has_many :comments, dependent: :destroy   
 
+  # Association for notification
+  has_many :notifications, foreign_key: :recipient_id
   # Association for follow
   has_many :followed_users, foreign_key: :follower_id, class_name: 'Follow'
   has_many :followees, through: :followed_users
