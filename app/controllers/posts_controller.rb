@@ -21,6 +21,11 @@ class PostsController < ApplicationController
   def like
     @post = Post.find(params[:id])
     @post.likes.create(user_id: current_user.id)
+    Notification.create( recipient: @post.user,
+                          actor_id: current_user.id,
+                          action: "liked your post",
+                          notifiable: @post
+                        )
     redirect_back(fallback_location: posts_path)
   end
 

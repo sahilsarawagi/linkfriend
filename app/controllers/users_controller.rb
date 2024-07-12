@@ -22,6 +22,11 @@ class UsersController < ApplicationController
     requested_pending_field = Follow.pending_field(current_user.id,@user.id)
     requested_pending_field.pending = true
     requested_pending_field.save
+    Notification.create( recipient: @user,
+                          actor_id: current_user.id,
+                          action: "requested to follow you",
+                          notifiable: current_user
+                        )
     redirect_back(fallback_location: users_path)
   end
   
@@ -46,6 +51,11 @@ class UsersController < ApplicationController
     pending_request_field = Follow.pending_field(user.id,current_user.id)
     pending_request_field.pending =  false
     pending_request_field.save
+    Notification.create( recipient: user,
+                         actor_id: current_user.id,
+                         action: "accepted your follow request",
+                         notifiable: current_user
+                        )
     redirect_back(fallback_location: users_path)
   end
 
