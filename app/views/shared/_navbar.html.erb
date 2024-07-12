@@ -17,15 +17,15 @@
           <span class="block text-sm text-gray-900 dark:text-white">Notifications</span>
         </div>
         <ul class="py-2" aria-labelledby="notification-menu-button">
-          <li>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">You have a new message</a>
-          </li>
-          <li>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Your order has been shipped</a>
-          </li>
-          <li>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Update available</a>
-          </li>
+          <%if !user_notifications.empty?%>
+            <% user_notifications.each do |notification|%>
+            <li>
+            <%=link_to "#{notification.actor.first_name.capitalize} #{notification.actor.last_name.capitalize} #{notification.action}", notification_path(notification) , class:"block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" %>
+            </li>
+            <%end%>
+          <%else%>
+            <p class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">No new notifications</p>
+          <%end%>
         </ul>
       </div>
       <button type="button" data-action="click->dropdown#toggleUserMenu" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown">
