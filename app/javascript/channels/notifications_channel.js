@@ -12,8 +12,11 @@ consumer.subscriptions.create("NotificationsChannel", {
 
   received(data) {
     // Called when there's incoming data on the websocket for this channel
-    const element = document.getElementById("messages");
-    console.log(element);
-    element.innerHTML=element.innerHTML  + data.html
+    const element = document.getElementById("notifications-drop");
+    if(element){
+    element.innerHTML= data.html + element.innerHTML  }
+    else {
+      console.error("Notification dropdown element not found");
+    }
   }
 });

@@ -5,4 +5,5 @@ class Notification < ApplicationRecord
 
   scope :leatest, ->{order("created_at DESC")}
   scope :unviewed, ->{where(viewed: false)}
+  after_create -> { NotificationRelayJob.perform_later(self) }
 end
