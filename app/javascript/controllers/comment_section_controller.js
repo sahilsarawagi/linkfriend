@@ -15,7 +15,6 @@ export default class extends Controller {
   }
 
   outsideClick(event) {
-    console.log("clicked")
     // Ignore event if clicked within element
     if(this.element === event.target || this.element.contains(event.target)) return;
 
