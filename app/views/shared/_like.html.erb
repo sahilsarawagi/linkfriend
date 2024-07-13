@@ -1,0 +1,16 @@
+<%= turbo_frame_tag "like_button_#{post.id}" do%>
+ <div class="flex items-center space-x-1">
+    <% if post_like_exist %>
+      <%= button_to unlike_post_path(post), method: :delete, class: "inline-flex items-center px-3 py-1 bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-medium rounded-md" do %>
+        <%= image_tag("unlike.svg", alt: "Like", class: "w-5 h-5") %>
+      <% end %>
+    <% else %>
+      <%= button_to like_post_path(post), method: :post, class: "inline-flex items-center px-3 py-1 bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-medium rounded-md" do %>
+        <%= image_tag("like.svg", alt: "UnLike", class: "w-5 h-5") %>
+      <% end %>
+    <% end %>
+    <p class="text-gray-400 text-sm font-normal px-2 pb-1">
+      <span class="underline"><%= link_to "likes", likes_post_path(post),data: { turbo_frame: "_top" }%></span> (<%= post.likes.count %>)
+    </p>
+    </div>
+<% end %>    
