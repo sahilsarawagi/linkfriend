@@ -27,13 +27,13 @@ class UsersController < ApplicationController
                           action: "requested to follow you",
                           notifiable: current_user
                         )
-    redirect_back(fallback_location: users_path)
+    update_follow_button(@user)
   end
   
   def unfollow
     @user = User.find(params[:id])
     current_user.followed_users.find_by(followee_id: @user.id).destroy
-    redirect_back(fallback_location: users_path)
+    update_follow_button(@user)
   end
 
   def followers
@@ -56,14 +56,14 @@ class UsersController < ApplicationController
                          action: "accepted your follow request",
                          notifiable: current_user
                         )
-    redirect_back(fallback_location: users_path)
+    update_follow_button(user)
   end
 
   def cancel_request
     user = User.find(params[:id])
     pending_request_field = Follow.pending_field(user.id,current_user.id)
     pending_request_field.destroy
-    redirect_back(fallback_location: users_path)
+    update_follow_button(user)
   end
 
   private
@@ -74,6 +74,14 @@ class UsersController < ApplicationController
 
   def user_followee(followee_list)
     followee_list.map(&:followee)
+  end
+
+  def update_follow_button(user)
+    render turbo_stream:
+          turbo_stream.replace( "follow_button_#{user.id}",
+            partial: "shared/user_list",
+            locals:{user: user}
+          )
   end
 end
 

@@ -5,12 +5,12 @@ class CommentsController < ApplicationController
     @comment = @user.comments.new(comment_params)
 
     if @comment.save
-      update_comment(@comment,@comment.post)
       Notification.create( recipient: @comment.post.user,
                            actor_id: current_user.id,
                            action: "commented on your post",
                            notifiable: @comment
                           )
+      update_comment(@comment,@comment.post)
     else
       render :index, status: :unprocessable_entity
     end

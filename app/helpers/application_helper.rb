@@ -9,7 +9,7 @@ module ApplicationHelper
 
   def follow_unfollow_button(user,pending=false)
     if user.id == current_user.id
-      {label: "Edit profile", path: edit_user_registration_path, method: :get}   
+      {label: "Edit profile", path: edit_user_registration_path, method: :get}    # this was giving content missing for this case partial user_list, that is why this is handled expliciltly in partial user_list.html.erb 
     elsif pending
       {label: "Requested", path: unfollow_user_path(user), method: :post}      
     elsif current_user.followees.include?(user) 

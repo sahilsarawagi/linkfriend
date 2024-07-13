@@ -21,13 +21,13 @@ class PostsController < ApplicationController
   def like
     @post = Post.find(params[:id])
     @post.likes.create(user_id: current_user.id)
-    update_like_button(@post)
-
+  
     Notification.create( recipient: @post.user,
                           actor_id: current_user.id,
                           action: "liked your post",
                           notifiable: @post
                         )
+    update_like_button(@post)
                         
   end
 
