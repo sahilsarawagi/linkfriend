@@ -58,7 +58,7 @@
       </div>
       <div data-comment-section-target="commentSection" class="p-4 overflow-auto max-h-72 hidden   border-t border-gray-200 dark:border-gray-700">
       <% post.comments.each do |comment| %>
-            <%= render 'shared/comment' ,comment: comment%>
+            <%= render 'shared/comment', post:post,comment: comment%>
       <% end %>
       </div>
   </div>  

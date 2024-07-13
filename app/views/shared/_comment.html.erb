@@ -1,3 +1,4 @@
+<%= turbo_frame_tag "comment_#{post.id}" do%>
  <!-- Individual Comments Here -->
 <div class="py-4 border-b border-gray-200 dark:border-gray-700">  
     <div class="flex justify-between items-center mt-2  mb-2">
@@ -12,3 +13,4 @@
           <%= comment.comment%> 
         </p>
   </div>
+<% end %>    

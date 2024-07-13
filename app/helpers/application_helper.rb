@@ -21,7 +21,7 @@ module ApplicationHelper
   end
 
   def user_name(user)
-    link_to "#{user.first_name.capitalize} #{user.last_name.capitalize}", user_path(user)
+    link_to  "#{user.first_name.capitalize} #{user.last_name.capitalize}", user_path(user), data: { turbo_frame: "_top" }
   end
   
   def user_email(user)
