@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   def index
     @post = Post.new
     @comment = Comment.new
-    @posts = Post.includes(:user, :comments, :likes).all
+    @posts = current_user.feed
   end
   
   def create

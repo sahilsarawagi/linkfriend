@@ -22,6 +22,13 @@ class User < ApplicationRecord
 
   has_many :likes, dependent: :destroy
 
+  def feed
+    following_ids = Follow.followee_list(self.id,false).pluck(:followee_id) 
+    Post.where(user_id: (following_ids) + [self.id])
+        .order(created_at: :desc)
+        .includes(:user, :comments, :likes)
+  end
+
   private 
   def add_default_profile
     unless profile_photo.attached?
