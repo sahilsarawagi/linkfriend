@@ -21,10 +21,14 @@ class CommentsController < ApplicationController
       params.require(:comment).permit(:comment,:post_id)
     end
     def update_comment(comment,post)
-      render turbo_stream:
-            turbo_stream.replace( "comment_#{post.id}",
+      render turbo_stream: [
+        turbo_stream.before( "comment_#{post.id}",
               partial: "shared/comment",
               locals:{ post:post, comment: comment}
-            )
+            ),
+        turbo_stream.replace("comment_count#{post.id}", 
+              partial: "shared/comment_count", 
+              locals: { count: post.comments.count, post: post })
+      ]
     end
 end

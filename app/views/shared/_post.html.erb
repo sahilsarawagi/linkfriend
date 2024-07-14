@@ -35,10 +35,10 @@
   </div>
   <div id="comment-form-<%= post.id %>" data-comment-section-target="commentForm" data-action="click@window->comment-section#outsideClick" class="bg-white hidden dark:bg-gray-900 dark:border-gray-700 shadow-md rounded-md overflow-hidden text-white p-4 mt-4">
   
-        <%= form_with model: [post,comment],class:"p-4" do |f| %>
+        <%= form_with model: [post,comment],class:"p-4", data: { controller: "comment", action: "turbo:submit-end->comment#clearComment" } do |f| %>
         <div class="flex items-center space-x-4">
             <%= image_tag(user_profile_photo(current_user), class: "w-10 h-10 rounded-full") %>  
-            <%= f.text_area :comment ,placeholder:"Write your comment here...", id:"comment-box", class:"dark:bg-[#1a202c] flex-1 border border-gray-200 dark:border-gray-700 focus:outline-none focus:border-blue-500 p-2 rounded-md resize-none"%>
+            <%= f.text_area :comment ,placeholder:"Write your comment here...", id:"comment-box", class:"dark:bg-[#1a202c] flex-1 border border-gray-200 dark:border-gray-700 focus:outline-none focus:border-blue-500 p-2 rounded-md resize-none", data: { comment_target: "commentBox" }%>
             <%= f.hidden_field :post_id, value: post.id %>
         </div>
         <div class="flex justify-end mt-4">
@@ -47,7 +47,7 @@
     
       <% end %>
       <div class="bg-gray-100 dark:bg-[#1a202c] px-4 py-2 flex items-center justify-between">
-        <p class="text-gray-800 dark:text-gray-200 font-semibold">Comments (<%= post.comments.count%>)</p>
+        <%= render 'shared/comment_count', count:post.comments.count, post: post%>
          <button id="dropdownComment1Button" data-action="click->comment-section#toggleComments"
                 class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                 type="button">
@@ -56,11 +56,16 @@
               
             </button>
       </div>
-      <div data-comment-section-target="commentSection" class="p-4 overflow-auto max-h-72 hidden   border-t border-gray-200 dark:border-gray-700">
-      <% post.comments.each do |comment| %>
-            <%= render 'shared/comment', post:post,comment: comment%>
-      <% end %>
-      </div>
+      <div data-comment-section-target="commentSection" class="p-4 overflow-auto max-h-72  border-t border-gray-200 dark:border-gray-700">
+
+        <%if post.comments.empty?%>
+           <%= render 'shared/comment', post:post,comment: comment%>
+           <% end%>
+    
+         <% post.comments.each do |comment| %>
+               <%= render 'shared/comment', post:post,comment: comment%>
+         <% end %>
+        </div>
   </div>  
  </div>
 <% end %>
