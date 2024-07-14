@@ -26,6 +26,7 @@ class User < ApplicationRecord
     following_ids = Follow.followee_list(self.id,false).pluck(:followee_id) 
     Post.where(user_id: (following_ids) + [self.id])
         .order(created_at: :desc)
+        .order('comments.created_at DESC')
         .includes(:user, :comments, :likes)
   end
 

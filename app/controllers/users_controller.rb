@@ -9,6 +9,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @user_posts = @user.posts.order(created_at: :desc).order('comments.created_at DESC').includes(:user, :comments, :likes)
     @comment = Comment.new
     @requested_pending_status = Follow.pending_field(current_user.id,@user.id)&.pending
     @pending_request_status = Follow.pending_field(@user.id,current_user.id)&.pending
