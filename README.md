@@ -2,6 +2,9 @@
 
 LinkFriend is a personal social media app designed to connect people and facilitate social interactions in a friendly and engaging environment.
 
+## Demo Video
+[Screencast from 07-10-24 09:11:06 PM IST.webm](https://github.com/user-attachments/assets/d616c03d-6e5c-458f-8099-55f3dfe19d60)
+
 ## Features
 - **Profile Creation**: Easily create a personalized profile to share your interests and connect with others.
 - **Posts**: Share updates, thoughts, and multimedia content with your friends and followers.
@@ -25,3 +28,4 @@ LinkFriend is a personal social media app designed to connect people and facilit
 - JavaScript
 - TailwindCSS
 - Hotwire
+
